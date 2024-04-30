@@ -1,0 +1,10 @@
+name: Test chart diff
+on:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: pjstaab/helm-diff@main
