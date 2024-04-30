@@ -12,7 +12,7 @@ runs:
   - name: Render Helm chart (current branch)
     run: |
       for chart in charts/*; do
-        helm template $chart > "${chart}_current.yaml"
+        helm template $chart > "charts/${chart}_current.yaml"
       done
 
   - name: Checkout default branch
@@ -23,11 +23,11 @@ runs:
   - name: Render Helm chart (default branch)
     run: |
       for chart in charts/*; do
-        helm template $chart > "${chart}_default.yaml"
+        helm template $chart > "charts/${chart}_default.yaml"
       done
 
   - name: Diff Helm charts
     run: |
       for chart in charts/*; do
-        diff "${chart}_default.yaml" "${chart}_current.yaml"
+        diff "charts/${chart}_default.yaml" "charts/${chart}_current.yaml"
       done
