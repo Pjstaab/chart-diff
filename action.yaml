@@ -3,6 +3,11 @@ description: This action renders Helm charts from the current branch and the def
 runs:
   using: composite
   steps:
+  - uses: yokawasa/action-setup-kube-tools@v0.11.1
+    with:
+      setup-tools: |
+        helm
+
   - name: Checkout code
     uses: actions/checkout@v4
     with:
@@ -10,6 +15,7 @@ runs:
       fetch-depth: 0
 
   - name: Render Helm chart (current branch)
+    shell: bash
     run: |
       for chart in charts/*; do
         helm template $chart > "charts/${chart}_current.yaml"
@@ -21,12 +27,14 @@ runs:
       ref: ${{ github.event.repository.default_branch }}
 
   - name: Render Helm chart (default branch)
+    shell: bash
     run: |
       for chart in charts/*; do
         helm template $chart > "charts/${chart}_default.yaml"
       done
 
   - name: Diff Helm charts
+    shell: bash
     run: |
       for chart in charts/*; do
         diff "charts/${chart}_default.yaml" "charts/${chart}_current.yaml"
