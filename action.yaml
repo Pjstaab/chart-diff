@@ -18,8 +18,9 @@ runs:
     shell: bash
     run: |
       for chart in charts/*; do
-        helm template $chart > "charts/${chart}_current.yaml"
+        helm template $chart > "${chart}_current.yaml"
       done
+      ls charts
 
   - name: Checkout default branch
     uses: actions/checkout@v4
@@ -30,12 +31,13 @@ runs:
     shell: bash
     run: |
       for chart in charts/*; do
-        helm template $chart > "charts/${chart}_default.yaml"
+        helm template $chart > "${chart}_default.yaml"
       done
+      ls charts
 
   - name: Diff Helm charts
     shell: bash
     run: |
       for chart in charts/*; do
-        diff "charts/${chart}_default.yaml" "charts/${chart}_current.yaml"
+        diff "${chart}_default.yaml" "${chart}_current.yaml"
       done
