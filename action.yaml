@@ -1,0 +1,33 @@
+name: Diff Helm Charts
+description: This action renders Helm charts from the current branch and the default branch and compares the rendered charts
+runs:
+  using: composite
+  steps:
+  - name: Checkout code
+    uses: actions/checkout@v4
+    with:
+      ref: ${{ github.event.pull_request.head.ref }}
+      fetch-depth: 0
+
+  - name: Render Helm chart (current branch)
+    run: |
+      for chart in charts/*; do
+        helm template $chart > "${chart}_current.yaml"
+      done
+
+  - name: Checkout default branch
+    uses: actions/checkout@v4
+    with:
+      ref: ${{ github.event.repository.default_branch }}
+
+  - name: Render Helm chart (default branch)
+    run: |
+      for chart in charts/*; do
+        helm template $chart > "${chart}_default.yaml"
+      done
+
+  - name: Diff Helm charts
+    run: |
+      for chart in charts/*; do
+        diff "${chart}_default.yaml" "${chart}_current.yaml"
+      done
