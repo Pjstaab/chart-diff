@@ -36,6 +36,11 @@ runs:
       done
       cat "${{ runner.temp }}/default.yaml"
 
+  - name: Diff Helm charts
+    shell: bash
+    continue-on-error: true
+    run: |
+      diff "${{ runner.temp }}/default.yaml" "${{ runner.temp }}/current.yaml"
 
   - name: End step
     shell: bash
