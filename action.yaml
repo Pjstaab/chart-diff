@@ -21,7 +21,7 @@ runs:
         helm template $chart > "${chart}_current.yaml"
       done
       echo "CURRENT_CHARTS=$(cat *.yaml)" >> $GITHUB_ENV
-      echo ${{ env.CURRENT_CHARTS }}
+      echo $CURRENT_CHARTS
 
   - name: Checkout default branch
     uses: actions/checkout@v4
@@ -35,11 +35,11 @@ runs:
         helm template $chart > "${chart}_default.yaml"
       done
       echo "DEFAULT_CHARTS=$(cat *.yaml)" >> $GITHUB_ENV
-      echo ${{ env.DEFAULT_CHARTS }}
+      echo $DEFAULT_CHARTS
 
   - name: Diff Helm charts
     shell: bash
     run: |
       for chart in charts/*; do
-        diff ${{ env.DEFAULT_CHARTS }} ${{ env.CURRENT_CHARTS }}
+        diff $DEFAULT_CHARTS $CURRENT_CHARTS
       done
