@@ -40,3 +40,8 @@ runs:
     shell: bash
     run: |
       diff "${{ runner.temp }}/default.yaml" "${{ runner.temp }}/current.yaml"
+
+  - name: End step
+    shell: bash
+    run: |
+      echo "End of the action"
