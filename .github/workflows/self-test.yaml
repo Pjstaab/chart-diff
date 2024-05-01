@@ -1,6 +1,9 @@
 name: Test chart diff
 on:
   pull_request:
+  push:
+    branches-ignore:
+      - ${{ github.event.repository.default_branch }}
 
 jobs:
   test:
