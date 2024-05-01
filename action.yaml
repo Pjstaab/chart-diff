@@ -11,6 +11,7 @@ runs:
   - name: Render Helm chart (current branch)
     shell: bash
     run: |
+      touch "${{ runner.temp }}/current.yaml"
       for chart in charts/*; do
         helm dep build $chart
         helm template $chart >> "${{ runner.temp }}/current.yaml"
@@ -25,6 +26,7 @@ runs:
   - name: Render Helm chart (default branch)
     shell: bash
     run: |
+      touch "${{ runner.temp }}/default.yaml"
       for chart in charts/*; do
         helm dep build $chart
         helm template $chart >> "${{ runner.temp }}/default.yaml"
