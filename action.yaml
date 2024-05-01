@@ -18,10 +18,10 @@ runs:
     shell: bash
     run: |
       for chart in charts/*; do
-        helm template $chart > "${chart}_current.yaml"
+        helm template $chart >> "${{ runner.temp }}/current.yaml"
       done
-      echo "CURRENT_CHARTS=$(cat *.yaml)" >> $GITHUB_ENV
-      echo $CURRENT_CHARTS
+      cat "${{ runner.temp }}/current.yaml"
+      
 
   - name: Checkout default branch
     uses: actions/checkout@v4
@@ -32,10 +32,9 @@ runs:
     shell: bash
     run: |
       for chart in charts/*; do
-        helm template $chart > "${chart}_default.yaml"
+        helm template $chart >> "${{ runner.temp }}/default.yaml"
       done
-      echo "DEFAULT_CHARTS=$(cat *.yaml)" >> $GITHUB_ENV
-      echo $DEFAULT_CHARTS
+      cat "${{ runner.temp }}/default.yaml"
 
   - name: Diff Helm charts
     shell: bash
