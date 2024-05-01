@@ -37,4 +37,7 @@ runs:
     run: |
       touch ${{ runner.temp }}/diff.yaml
       ls -l ${{ runner.temp }}
-      diff -u ${{ runner.temp }}/default.yaml ${{ runner.temp }}/current.yaml
+      echo "```" >> ${{ runner.temp }}/diff.yaml
+      diff -u ${{ runner.temp }}/default.yaml ${{ runner.temp }}/current.yaml >> ${{ runner.temp }}/diff.yaml || true
+      echo "```" >> ${{ runner.temp }}/diff.yaml
+      cat ${{ runner.temp }}/diff.yaml >> $GITHUB_STEP_SUMMARY
