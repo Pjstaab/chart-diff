@@ -3,10 +3,6 @@ description: This action renders Helm charts from the current branch and the def
 runs:
   using: composite
   steps:
-  - uses: yokawasa/action-setup-kube-tools@v0.11.1
-    with:
-      helm: 3.14.3
-
   - name: Checkout code
     uses: actions/checkout@v4
     with:
@@ -41,8 +37,3 @@ runs:
     continue-on-error: true
     run: |
       git diff "${{ runner.temp }}/default.yaml" "${{ runner.temp }}/current.yaml" >> $GITHUB_STEP_SUMMARY
-
-  - name: End step
-    shell: bash
-    run: |
-      echo "End of the action"
