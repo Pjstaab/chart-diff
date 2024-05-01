@@ -33,7 +33,9 @@ runs:
     shell: bash
     continue-on-error: true
     run: |
+      cat "Echo Default"
       cat "${{ runner.temp }}/default.yaml"
+      cat "Echo Current"
       cat "${{ runner.temp }}/current.yaml"
       echo "```" >> "${{ runner.temp }}/diff.yaml"
       diff -u "${{ runner.temp }}/default.yaml" "${{ runner.temp }}/current.yaml" >> "${{ runner.temp }}/diff.yaml"
