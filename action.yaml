@@ -5,8 +5,7 @@ runs:
   steps:
   - uses: yokawasa/action-setup-kube-tools@v0.11.1
     with:
-      setup-tools: |
-        helm
+      helm: 3.14.3
 
   - name: Checkout code
     uses: actions/checkout@v4
