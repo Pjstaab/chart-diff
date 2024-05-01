@@ -20,7 +20,7 @@ runs:
       for chart in charts/*; do
         helm template $chart > "${chart}_current.yaml"
       done
-      cat *.yaml > $CURRENT
+      cat *.yaml >> $CURRENT
 
   - name: Checkout default branch
     uses: actions/checkout@v4
@@ -33,7 +33,7 @@ runs:
       for chart in charts/*; do
         helm template $chart > "${chart}_default.yaml"
       done
-      cat *.yaml > $DEFAULT
+      cat *.yaml >> $DEFAULT
 
   - name: Diff Helm charts
     shell: bash
