@@ -40,5 +40,5 @@ runs:
     shell: bash
     run: |
       for chart in charts/*; do
-        diff $DEFAULT_CHARTS $CURRENT_CHARTS
+        diff "${{ runner.temp }}/default.yaml" "${{ runner.temp }}/current.yaml"
       done
