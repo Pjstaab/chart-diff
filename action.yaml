@@ -36,4 +36,7 @@ runs:
     shell: bash
     continue-on-error: true
     run: |
-      git diff "${{ runner.temp }}/default.yaml" "${{ runner.temp }}/current.yaml" >> $GITHUB_STEP_SUMMARY
+      git diff "${{ runner.temp }}/default.yaml" "${{ runner.temp }}/current.yaml" > "${{ runner.temp }}/diff.yaml"
+      echo "```" >> $GITHUB_STEP_SUMMARY
+      cat "${{ runner.temp }}/diff.yaml" >> $GITHUB_STEP_SUMMARY
+      echo "```" >> $GITHUB_STEP_SUMMARY
