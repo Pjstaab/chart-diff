@@ -37,6 +37,4 @@ runs:
     run: |
       touch ${{ runner.temp }}/diff.yaml
       ls -l ${{ runner.temp }}
-      echo "```" >> ${{ runner.temp }}/diff.yaml
       diff -u ${{ runner.temp }}/default.yaml ${{ runner.temp }}/current.yaml
-      echo "```" >> ${{ runner.temp }}/diff.yaml
