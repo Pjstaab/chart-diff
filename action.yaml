@@ -15,6 +15,7 @@ runs:
         helm dep build $chart
         helm template $chart >> "${{ runner.temp }}/current.yaml"
       done
+      cat "${{ runner.temp }}/current.yaml"
 
   - name: Checkout default branch
     uses: actions/checkout@v4
