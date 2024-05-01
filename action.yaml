@@ -39,6 +39,4 @@ runs:
   - name: Diff Helm charts
     shell: bash
     run: |
-      for chart in charts/*; do
-        diff "${{ runner.temp }}/default.yaml" "${{ runner.temp }}/current.yaml"
-      done
+      diff "${{ runner.temp }}/default.yaml" "${{ runner.temp }}/current.yaml"
