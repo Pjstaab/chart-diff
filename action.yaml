@@ -15,8 +15,6 @@ runs:
         helm dep build $chart
         helm template $chart >> "${{ runner.temp }}/current.yaml"
       done
-      cat "${{ runner.temp }}/current.yaml"
-      
 
   - name: Checkout default branch
     uses: actions/checkout@v4
@@ -30,7 +28,6 @@ runs:
         helm dep build $chart
         helm template $chart >> "${{ runner.temp }}/default.yaml"
       done
-      cat "${{ runner.temp }}/default.yaml"
 
   - name: Diff Helm charts
     shell: bash
