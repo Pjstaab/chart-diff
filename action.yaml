@@ -18,7 +18,7 @@ runs:
     shell: bash
     run: |
       for chart in charts/*; do
-        helm template $chart >> "${chart}_current.yaml"
+        helm template $chart > "${chart}_current.yaml"
       done
       cat *.yaml > $CURRENT
 
