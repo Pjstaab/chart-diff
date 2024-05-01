@@ -37,4 +37,3 @@ runs:
       diff -u "${{ runner.temp }}/default.yaml" "${{ runner.temp }}/current.yaml" >> "${{ runner.temp }}/diff.yaml"
       echo "```" >> "${{ runner.temp }}/diff.yaml"
       cat "${{ runner.temp }}/diff.yaml"
-      cat "${{ runner.temp }}/diff.yaml" >> $GITHUB_STEP_SUMMARY
