@@ -39,4 +39,4 @@ runs:
       echo '```' >> ${{ runner.temp }}/diff.md
       diff -u ${{ runner.temp }}/default.yaml ${{ runner.temp }}/current.yaml >> ${{ runner.temp }}/diff.md || true
       echo '```' >> ${{ runner.temp }}/diff.md
-      cat ${{ runner.temp }}/diff.md
+      cat ${{ runner.temp }}/diff.md >> $GITHUB_STEP_SUMMARY
